@@ -1,4 +1,5 @@
 ﻿using DesignPattern.SOLID;
+using static DesignPattern.SOLID.DependencyInversion;
 using static DesignPattern.SOLID.LiskovPrinciple;
 using static DesignPattern.SOLID.OCP;
 
@@ -35,13 +36,27 @@ using static DesignPattern.SOLID.OCP;
 
 /*Liskov Principle*/
 
-static  int Area(Rectangle r) => r.Width * r.Height;
+//static  int Area(Rectangle r) => r.Width * r.Height;
 
-Rectangle rc = new Rectangle(2, 3);
-Console.WriteLine($"{rc} has area {Area(rc)}");
+//Rectangle rc = new Rectangle(2, 3);
+//Console.WriteLine($"{rc} has area {Area(rc)}");
 
 
-/*Square*/
-Rectangle sq = new Square();
-sq.Width = 4;
-Console.WriteLine($"{sq} has area {Area(sq)}");
+///*Square*/
+//Rectangle sq = new Square();
+//sq.Width = 4;
+//Console.WriteLine($"{sq} has area {Area(sq)}");
+
+//Dependency Inversion
+
+
+var parent = new Person { Name = "John" };
+var child1 = new Person { Name = "Chris" };
+var child2 = new Person { Name = "Matt" };
+
+// low-level module
+var relationships = new Relationships();
+relationships.AddParentAndChild(parent, child1);
+relationships.AddParentAndChild(parent, child2);
+
+var research = new Research(relationships,"John");

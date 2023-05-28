@@ -1,4 +1,7 @@
 ﻿using DesignPattern.SOLID;
+using System.Text;
+using static DesignPattern.Builder.Builder;
+using static DesignPattern.Builder.BuilderWithRecursiveGenerics;
 using static DesignPattern.SOLID.DependencyInversion;
 using static DesignPattern.SOLID.LiskovPrinciple;
 using static DesignPattern.SOLID.OCP;
@@ -50,13 +53,52 @@ using static DesignPattern.SOLID.OCP;
 //Dependency Inversion
 
 
-var parent = new Person { Name = "John" };
-var child1 = new Person { Name = "Chris" };
-var child2 = new Person { Name = "Matt" };
+//var parent = new Person { Name = "John" };
+//var child1 = new Person { Name = "Chris" };
+//var child2 = new Person { Name = "Matt" };
 
-// low-level module
-var relationships = new Relationships();
-relationships.AddParentAndChild(parent, child1);
-relationships.AddParentAndChild(parent, child2);
+//// low-level module
+//var relationships = new Relationships();
+//relationships.AddParentAndChild(parent, child1);
+//relationships.AddParentAndChild(parent, child2);
 
-var research = new Research(relationships,"John");
+//var research = new Research(relationships,"John");
+
+
+//builder 
+// if you want to build a simple HTML paragraph using StringBuilder
+//var hello = "hello";
+//var stringBuilder = new StringBuilder();
+//stringBuilder.Append("<p>");
+//stringBuilder.Append(hello);
+//stringBuilder.Append("</p>");
+//Console.WriteLine(stringBuilder);
+
+// now I want an HTML list with 2 words in it
+//var words = new[] { "hello", "world" };
+//stringBuilder.Clear();
+//stringBuilder.Append("<ul>");
+//foreach (var word in words)
+//{
+//    stringBuilder.AppendFormat("<li>{0}</li>", word);
+//}
+//stringBuilder.Append("</ul>");
+//Console.WriteLine(stringBuilder);
+
+// ordinary non-fluent builder
+var builder = new HtmlBuilder("ul");
+builder.AddChild("li", "hello").AddChild("li", "world");
+Console.WriteLine(builder.ToString());
+
+//// fluent builder
+//sb.Clear();
+//builder.Clear(); // disengage builder from the object it's building, then...
+//builder.AddChildFluent("li", "hello").AddChildFluent("li", "world");
+//WriteLine(builder);
+
+var me = DesignPattern.Builder.BuilderWithRecursiveGenerics.Person.New
+       .Called("Sandra")
+       .WorksAt("Geidea")
+       .BornAt(DateTime.UtcNow)
+       .Build();
+Console.WriteLine(me);

@@ -2,6 +2,8 @@
 using System.Text;
 using static DesignPattern.Builder.Builder;
 using static DesignPattern.Builder.BuilderWithRecursiveGenerics;
+using static DesignPattern.Builder.FacadeBuilder;
+using static DesignPattern.Builder.StepWiseBuilder;
 using static DesignPattern.SOLID.DependencyInversion;
 using static DesignPattern.SOLID.LiskovPrinciple;
 using static DesignPattern.SOLID.OCP;
@@ -86,9 +88,9 @@ using static DesignPattern.SOLID.OCP;
 //Console.WriteLine(stringBuilder);
 
 // ordinary non-fluent builder
-var builder = new HtmlBuilder("ul");
-builder.AddChild("li", "hello").AddChild("li", "world");
-Console.WriteLine(builder.ToString());
+//var builder = new HtmlBuilder("ul");
+//builder.AddChild("li", "hello").AddChild("li", "world");
+//Console.WriteLine(builder.ToString());
 
 //// fluent builder
 //sb.Clear();
@@ -96,9 +98,25 @@ Console.WriteLine(builder.ToString());
 //builder.AddChildFluent("li", "hello").AddChildFluent("li", "world");
 //WriteLine(builder);
 
-var me = DesignPattern.Builder.BuilderWithRecursiveGenerics.Person.New
-       .Called("Sandra")
-       .WorksAt("Geidea")
-       .BornAt(DateTime.UtcNow)
-       .Build();
-Console.WriteLine(me);
+//var me = DesignPattern.Builder.BuilderWithRecursiveGenerics.Person.New
+//       .Called("Sandra")
+//       .WorksAt("Geidea")
+//       .BornAt(DateTime.UtcNow)
+//       .Build();
+//Console.WriteLine(me);
+
+
+var car = new CarBuilder()
+    .CreateCar()
+    .CarType(CarTypes.crossover)
+    .BuildCarWheelSize(22)
+    .BuildCar();
+
+Console.WriteLine(car);
+
+
+//var personBuilder = new PersonBuilder();
+//DesignPattern.Builder.FacadeBuilder.Person person = personBuilder.BuildEmployementDetails.WorksAt("Geidea").As("Software developer").Earning(123000)
+//                          .BuildAddressDetails.At("Zetoun").In("cairo").WithPostcode("02");
+
+//Console.WriteLine(person);

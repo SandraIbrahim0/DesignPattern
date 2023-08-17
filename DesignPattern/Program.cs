@@ -1,4 +1,7 @@
-﻿using DesignPattern.SOLID;
+﻿using DesignPattern.Facade;
+using DesignPattern.Factory;
+using DesignPattern.SOLID;
+using System.Drawing;
 using System.Text;
 using static DesignPattern.Builder.Builder;
 using static DesignPattern.Builder.BuilderWithRecursiveGenerics;
@@ -106,13 +109,13 @@ using static DesignPattern.SOLID.OCP;
 //Console.WriteLine(me);
 
 
-var car = new CarBuilder()
-    .CreateCar()
-    .CarType(CarTypes.crossover)
-    .BuildCarWheelSize(22)
-    .BuildCar();
+//var car = new CarBuilder()
+//    .CreateCar()
+//    .CarType(CarTypes.crossover)
+//    .BuildCarWheelSize(22)
+//    .BuildCar();
 
-Console.WriteLine(car);
+//Console.WriteLine(car);
 
 
 //var personBuilder = new PersonBuilder();
@@ -120,3 +123,13 @@ Console.WriteLine(car);
 //                          .BuildAddressDetails.At("Zetoun").In("cairo").WithPostcode("02");
 
 //Console.WriteLine(person);
+
+
+
+//var point = DesignPattern.Factory.Point.FactoryPoint.PolarPoint(2, 6);
+//Console.WriteLine(point.ToString());
+
+//AsynFactory x = await AsynFactory.Create();
+
+var facade = new MagicSquareGenerator();
+facade.Generate(2);

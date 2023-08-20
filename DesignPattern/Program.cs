@@ -1,4 +1,5 @@
-﻿using DesignPattern.Facade;
+﻿using DesignPattern.Decorator;
+using DesignPattern.Facade;
 using DesignPattern.Factory;
 using DesignPattern.SOLID;
 using System.Drawing;
@@ -131,5 +132,21 @@ using static DesignPattern.SOLID.OCP;
 
 //AsynFactory x = await AsynFactory.Create();
 
-var facade = new MagicSquareGenerator();
-facade.Generate(2);
+//var facade = new MagicSquareGenerator();
+//facade.Generate(2);
+
+
+ICar bmwCar1 = new BMWCar();
+
+bmwCar1.ManufactureCar();
+Console.WriteLine(bmwCar1 + "\n");
+
+DesielCarEngine carWithDieselEngine = new DesielCarEngine(bmwCar1);
+carWithDieselEngine.ManufactureCar();
+Console.WriteLine();
+
+//The Process is the same for adding Petrol Engine to the existing Car
+ICar bmwCar2 = new BMWCar();
+PetrolCarEngine carWithPetrolEngine = new PetrolCarEngine(bmwCar2);
+carWithPetrolEngine.ManufactureCar();
+Console.ReadKey();

@@ -2,6 +2,7 @@
 using DesignPattern.Facade;
 using DesignPattern.Factory;
 using DesignPattern.SOLID;
+using DesignPattern.Strategy.Dynamic;
 using System.Drawing;
 using System.Text;
 using static DesignPattern.Builder.Builder;
@@ -136,17 +137,46 @@ using static DesignPattern.SOLID.OCP;
 //facade.Generate(2);
 
 
-ICar bmwCar1 = new BMWCar();
+//ICar bmwCar1 = new BMWCar();
 
-bmwCar1.ManufactureCar();
-Console.WriteLine(bmwCar1 + "\n");
+//bmwCar1.ManufactureCar();
+//Console.WriteLine(bmwCar1 + "\n");
 
-DesielCarEngine carWithDieselEngine = new DesielCarEngine(bmwCar1);
-carWithDieselEngine.ManufactureCar();
-Console.WriteLine();
+//DesielCarEngine carWithDieselEngine = new DesielCarEngine(bmwCar1);
+//carWithDieselEngine.ManufactureCar();
+//Console.WriteLine();
 
-//The Process is the same for adding Petrol Engine to the existing Car
-ICar bmwCar2 = new BMWCar();
-PetrolCarEngine carWithPetrolEngine = new PetrolCarEngine(bmwCar2);
-carWithPetrolEngine.ManufactureCar();
+////The Process is the same for adding Petrol Engine to the existing Car
+//ICar bmwCar2 = new BMWCar();
+//PetrolCarEngine carWithPetrolEngine = new PetrolCarEngine(bmwCar2);
+//carWithPetrolEngine.ManufactureCar();
+//Console.ReadKey();
+
+// Startegy pattern
+
+
+Console.WriteLine("Please Select Strategy you want to procceed : \n1 For MarkDown \n2 For Html ");
+int SelectedType = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Strategy type is : " + SelectedType);
+var context = new TextProcessing();
+
+// dynaimc one 
+context.SetProcessingStrategy(SelectedType);
+
+//Based on the Payment Type Selected by user at Runtime static Strategy
+//Create the Appropriate Payment Strategy Instance and call the SetPaymentStrategy method
+//if (SelectedType == (int)StrategyFormat.Html)
+//{
+//    context.SetProcessingStrategy(new HtmlStrategy());
+//}
+//else if (SelectedType == (int)StrategyFormat.Markdown)
+//{
+//    context.SetProcessingStrategy(new MarkdownStrategy());
+//}
+//else
+//{
+//    Console.WriteLine("You Select an Invalid Option");
+//}
+context.AppendList(new[] { "foo", "bar", "baz" });
+Console.WriteLine(context);
 Console.ReadKey();

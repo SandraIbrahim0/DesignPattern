@@ -1,6 +1,7 @@
 ﻿using DesignPattern.Decorator;
 using DesignPattern.Facade;
 using DesignPattern.Factory;
+using DesignPattern.Interpreter;
 using DesignPattern.SOLID;
 using DesignPattern.Strategy.Dynamic;
 using System.Drawing;
@@ -155,13 +156,13 @@ using static DesignPattern.SOLID.OCP;
 // Startegy pattern
 
 
-Console.WriteLine("Please Select Strategy you want to procceed : \n1 For MarkDown \n2 For Html ");
-int SelectedType = Convert.ToInt32(Console.ReadLine());
-Console.WriteLine("Strategy type is : " + SelectedType);
-var context = new TextProcessing();
+//Console.WriteLine("Please Select Strategy you want to procceed : \n1 For MarkDown \n2 For Html ");
+//int SelectedType = Convert.ToInt32(Console.ReadLine());
+//Console.WriteLine("Strategy type is : " + SelectedType);
+//var context = new TextProcessing();
 
 // dynaimc one 
-context.SetProcessingStrategy(SelectedType);
+//context.SetProcessingStrategy(SelectedType);
 
 //Based on the Payment Type Selected by user at Runtime static Strategy
 //Create the Appropriate Payment Strategy Instance and call the SetPaymentStrategy method
@@ -177,6 +178,16 @@ context.SetProcessingStrategy(SelectedType);
 //{
 //    Console.WriteLine("You Select an Invalid Option");
 //}
-context.AppendList(new[] { "foo", "bar", "baz" });
-Console.WriteLine(context);
-Console.ReadKey();
+//context.AppendList(new[] { "foo", "bar", "baz" });
+//Console.WriteLine(context);
+//Console.ReadKey();
+
+
+// Interpreter pattern
+
+var input = "(13+4)-(12+1)";
+var tokens = Lexi.Lex(input);
+Console.WriteLine(string.Join("\t", tokens));
+
+var parsed = Parsing.Parse(tokens);
+Console.WriteLine($"{input} = {parsed.Value}");

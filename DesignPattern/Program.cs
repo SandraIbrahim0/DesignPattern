@@ -1,15 +1,19 @@
-﻿using DesignPattern.Decorator;
+﻿using DesignPattern.ChainOfResponsbility;
+using DesignPattern.Command;
+using DesignPattern.Decorator;
 using DesignPattern.Facade;
 using DesignPattern.Factory;
 using DesignPattern.Interpreter;
 using DesignPattern.SOLID;
 using DesignPattern.Strategy.Dynamic;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using static DesignPattern.Builder.Builder;
 using static DesignPattern.Builder.BuilderWithRecursiveGenerics;
 using static DesignPattern.Builder.FacadeBuilder;
 using static DesignPattern.Builder.StepWiseBuilder;
+using static DesignPattern.Command.Order;
 using static DesignPattern.SOLID.DependencyInversion;
 using static DesignPattern.SOLID.LiskovPrinciple;
 using static DesignPattern.SOLID.OCP;
@@ -185,9 +189,91 @@ using static DesignPattern.SOLID.OCP;
 
 // Interpreter pattern
 
-var input = "(13+4)-(12+1)";
-var tokens = Lexi.Lex(input);
-Console.WriteLine(string.Join("\t", tokens));
+//var input = "(13+4)-(12+1)";
+//var tokens = Lexi.Lex(input);
+//Console.WriteLine(string.Join("\t", tokens));
 
-var parsed = Parsing.Parse(tokens);
-Console.WriteLine($"{input} = {parsed.Value}");
+//var parsed = Parsing.Parse(tokens);
+//Console.WriteLine($"{input} = {parsed.Value}");
+
+// Chain of reposibility Pattern 
+
+//var nonEmptyValidator = new NonEmptyValidator();
+//var emailValidator = new EmailFormatValidator();
+//var passwordValidator = new PasswordStrengthValidator();
+//nonEmptyValidator.SetNextHandler(emailValidator);
+//emailValidator.SetNextHandler(passwordValidator);
+//// Sample input
+//var userInput = new UserInput
+//{
+//    Email = "pranaya.rout@dotnettutorials.net",
+//    Password = "StrongPass123"
+//};
+//if (nonEmptyValidator.IsValid(userInput))
+//{
+//    Console.WriteLine("Registration Successful!");
+//}
+//else
+//{
+//    Console.WriteLine("Validation Failed!");
+//}
+//var userInput2 = new UserInput
+//{
+//    Email = "pranaya.rout",
+//    Password = "StrongPass123"
+//};
+//if (nonEmptyValidator.IsValid(userInput2))
+//{
+//    Console.WriteLine("Registration Successful!");
+//}
+//else
+//{
+//    Console.WriteLine("Validation Failed!");
+//}
+//Console.ReadLine();
+
+// Command Pattern
+
+DineChef dineChef = new DineChef();
+dineChef.SetOrderCommand(1); /* Insert Order */
+dineChef.SetMenuItem(new MenuItem()
+{
+    TableNumber = 1,
+    Item = "Super Mega Burger",
+    Quantity = 1,
+    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" } }
+});
+dineChef.ExecuteCommand();
+
+dineChef.SetOrderCommand(1); /* Insert Order */
+dineChef.SetMenuItem(new MenuItem()
+{
+    TableNumber = 1,
+    Item = "Cheese Sandwich",
+    Quantity = 1,
+    Tags = new List<Tag>() { new Tag() { TagName = "Spicy Mayo," } }
+});
+dineChef.ExecuteCommand();
+dineChef.ShowCurrentOrder();
+
+dineChef.SetOrderCommand(3); /* Remove the Cheese Sandwich */
+dineChef.SetMenuItem(new MenuItem()
+{
+    TableNumber = 1,
+    Item = "Cheese Sandwich"
+});
+dineChef.ExecuteCommand();
+dineChef.ShowCurrentOrder();
+
+dineChef.SetOrderCommand(2);/* Modify Order */
+dineChef.SetMenuItem(new MenuItem()
+{
+    TableNumber = 1,
+    Item = "Super Mega Burger",
+    Quantity = 1,
+    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese" } }
+});
+dineChef.ExecuteCommand();
+dineChef.ShowCurrentOrder();
+Console.ReadKey();
+

@@ -1,4 +1,5 @@
-﻿using DesignPattern.ChainOfResponsbility;
+﻿using DesignPattern.Bridge;
+using DesignPattern.ChainOfResponsbility;
 using DesignPattern.Command;
 using DesignPattern.Decorator;
 using DesignPattern.Facade;
@@ -234,46 +235,59 @@ using static DesignPattern.SOLID.OCP;
 
 // Command Pattern
 
-DineChef dineChef = new DineChef();
-dineChef.SetOrderCommand(1); /* Insert Order */
-dineChef.SetMenuItem(new MenuItem()
-{
-    TableNumber = 1,
-    Item = "Super Mega Burger",
-    Quantity = 1,
-    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" } }
-});
-dineChef.ExecuteCommand();
+//DineChef dineChef = new DineChef();
+//dineChef.SetOrderCommand(1); /* Insert Order */
+//dineChef.SetMenuItem(new MenuItem()
+//{
+//    TableNumber = 1,
+//    Item = "Super Mega Burger",
+//    Quantity = 1,
+//    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese," }, new Tag() { TagName = " Tomato" } }
+//});
+//dineChef.ExecuteCommand();
 
-dineChef.SetOrderCommand(1); /* Insert Order */
-dineChef.SetMenuItem(new MenuItem()
-{
-    TableNumber = 1,
-    Item = "Cheese Sandwich",
-    Quantity = 1,
-    Tags = new List<Tag>() { new Tag() { TagName = "Spicy Mayo," } }
-});
-dineChef.ExecuteCommand();
-dineChef.ShowCurrentOrder();
+//dineChef.SetOrderCommand(1); /* Insert Order */
+//dineChef.SetMenuItem(new MenuItem()
+//{
+//    TableNumber = 1,
+//    Item = "Cheese Sandwich",
+//    Quantity = 1,
+//    Tags = new List<Tag>() { new Tag() { TagName = "Spicy Mayo," } }
+//});
+//dineChef.ExecuteCommand();
+//dineChef.ShowCurrentOrder();
 
-dineChef.SetOrderCommand(3); /* Remove the Cheese Sandwich */
-dineChef.SetMenuItem(new MenuItem()
-{
-    TableNumber = 1,
-    Item = "Cheese Sandwich"
-});
-dineChef.ExecuteCommand();
-dineChef.ShowCurrentOrder();
+//dineChef.SetOrderCommand(3); /* Remove the Cheese Sandwich */
+//dineChef.SetMenuItem(new MenuItem()
+//{
+//    TableNumber = 1,
+//    Item = "Cheese Sandwich"
+//});
+//dineChef.ExecuteCommand();
+//dineChef.ShowCurrentOrder();
 
-dineChef.SetOrderCommand(2);/* Modify Order */
-dineChef.SetMenuItem(new MenuItem()
-{
-    TableNumber = 1,
-    Item = "Super Mega Burger",
-    Quantity = 1,
-    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese" } }
-});
-dineChef.ExecuteCommand();
-dineChef.ShowCurrentOrder();
+//dineChef.SetOrderCommand(2);/* Modify Order */
+//dineChef.SetMenuItem(new MenuItem()
+//{
+//    TableNumber = 1,
+//    Item = "Super Mega Burger",
+//    Quantity = 1,
+//    Tags = new List<Tag>() { new Tag() { TagName = "Jalapenos," }, new Tag() { TagName = " Cheese" } }
+//});
+//dineChef.ExecuteCommand();
+//dineChef.ShowCurrentOrder();
+//Console.ReadKey();
+
+//Bridge Design pattern 
+//client here will depend on the abstraction layer not the implementation layer or the details of the implementation 
+AbstractRemoteControl sonyRemoteControl = new SonyRemoteControl(new SonyTv());
+sonyRemoteControl.SwitchOn();
+sonyRemoteControl.SetChannel(101);
+sonyRemoteControl.SwitchOff();
+Console.WriteLine();
+
+AbstractRemoteControl samsungRemoteControl = new SamsungRemoteControl(new SamsungTv());
+samsungRemoteControl.SwitchOn();
+samsungRemoteControl.SetChannel(202);
+samsungRemoteControl.SwitchOff();
 Console.ReadKey();
-
